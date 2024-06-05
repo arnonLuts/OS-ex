@@ -1,3 +1,4 @@
+# Arnon Lutsky 213561640
 Game_Loop(){
     tot_moves=$1
     move_num=0
@@ -88,21 +89,29 @@ Make_Move(){
         board[$(( $to_tile - 2))]="."
     elif [ "$move" = "e1g1" -a ${board[$uc_king_pos]} = "K" ]
     then
-        board[$lc_king_pos]='.'
+        board[$uc_king_pos]='.'
         board[$to_tile]="$piece"
-        board[$(( $to_tile - 1))]="r"
+        board[$(( $to_tile - 1))]="R"
         board[$(( $to_tile + 1))]="."
     elif [ "$move" = "e1c1" -a ${board[$uc_king_pos]} = "K" ]
     then
-        board[$lc_king_pos]='.'
+        board[$uc_king_pos]='.'
         board[$to_tile]="$piece"
-        board[$(( $to_tile + 1))]="r"
+        board[$(( $to_tile + 1))]="R"
         board[$(( $to_tile - 2))]="."
     elif [[ "${from_move:0:1}" != "${to_move:0:1}" && "${board[$to_tile]}" == "." && ( "${board[$from_tile]}" == "p" || "${board[$from_tile]}" == "P" ) ]]
-    then
-        board[$from_tile]='.'
-        board[$to_tile]="$piece"
-        board[$to_tile]='.'
+        then
+        if [ "$piece" == "p" ]
+        then
+            board[$from_tile]='.'
+            board[$to_tile]="$piece"
+            board[$(( $to_tile - 8))]='.'
+        elif [ "$piece" == "P" ]
+        then
+            board[$from_tile]='.'
+            board[$to_tile]="$piece"
+            board[$(( $to_tile + 8))]='.'
+        fi
     else
         board[$from_tile]='.'
         board[$to_tile]="$piece"
