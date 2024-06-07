@@ -2,20 +2,22 @@
 Game_Loop(){
     tot_moves=$1
     move_num=0
+    echo "Move $move_num/$tot_moves"
     Print_Board
     while true
     do
-        echo "Move $move_num/$tot_moves"
         echo "Press 'd' to move forward, 'a' to move back, 'w' to go to the start, 's' to go to the end, 'q' to quit:"
         read key
         if [ "$key" = "q" ]
         then
             echo "Exiting."
+            echo "End of game."
             exit 0
         elif [ "$key" = "w" ]
         then
             move_num=0
             Reset_Board
+            echo "Move $move_num/$tot_moves"
             Print_Board
         elif [ "$key" = "d" ]
         then
@@ -25,20 +27,24 @@ Game_Loop(){
             else
                 Make_Move "$move_num"
                 ((move_num++))
+                echo "Move $move_num/$tot_moves"
                 Print_Board
             fi
         elif [ "$key" = "a" ]
         then
             if [ "$move_num" -eq 0 ]
             then
+                echo "Move $move_num/$tot_moves"
                 Print_Board
             else
                 ((move_num--))
+                echo "Move $move_num/$tot_moves"
                 Play_To_Move "$move_num"
             fi
         elif [ "$key" = "s" ]
         then
             move_num=$tot_moves
+            echo "Move $move_num/$tot_moves"
             Play_To_Move "$move_num"
         else
             echo "Invalid key pressed: $key"
@@ -46,7 +52,7 @@ Game_Loop(){
     done    
 }
 Print_Board(){
-    echo "  a b c d e f g h  "
+    echo "  a b c d e f g h"
     for (( i=8; i>0; i-- )) 
     do
         echo -n "$i "
@@ -56,7 +62,7 @@ Print_Board(){
         done
         echo "$i"
     done
-    echo "  a b c d e f g h  "
+    echo "  a b c d e f g h"
 }
 Make_Move(){
     curr_move=$1
