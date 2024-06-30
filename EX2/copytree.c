@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <dirent.h>
 #include <stdio.h>
+<<<<<<< HEAD
 
 void get_directory_path(const char *file_path, char *dir_path)
 {
@@ -30,6 +31,7 @@ void copy_file(const char *src, const char *dest, int copy_symlinks, int copy_pe
         return;
     }
 
+<<<<<<< HEAD
     if (S_ISLNK(st.st_mode))
     {
         char linked_file[st.st_size + 1];
